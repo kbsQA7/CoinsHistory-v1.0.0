@@ -71,6 +71,23 @@ jobs:
           REPO: ${{ github.repository }}
         run: node generateMessage.js > message.txt
 
+      - name: Debug
+        run: |
+           echo "message.txt contents:"
+           cat message.txt
+
+           echo ""
+           echo "Checking allure-summary-chart.png:"
+           ls -lh allure-summary-chart.png || echo "not found"
+
+           echo ""
+           echo "Environment variables:"
+           echo "Branch: $GITHUB_REF_NAME"
+           echo "Time: $TIME"
+           echo "Run ID: $RUN_ID"
+           echo "Repo: $REPO"
+
+
       - name: Send chart and message to Telegram
         run: |
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendPhoto" \
