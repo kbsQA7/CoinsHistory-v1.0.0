@@ -57,7 +57,7 @@ const message = `
 🔁 *Branch:* ${branch}
 ⚙️ *Environment:* Production
 
-📊 *Результаты:*
+📊 *Results:*
 ✅ Passed: ${passed}
 ❌ Failed: ${failed}
 ⏭ Skipped: ${skipped}
