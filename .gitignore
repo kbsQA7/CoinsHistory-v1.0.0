@@ -1,22 +1,25 @@
-HELP.md
-build/
-!**/src/main/**
-!**/src/test/**
-
-### IntelliJ IDEA ###
-.idea
-*.iws
+.idea/
 *.iml
-*.ipr
+.vscode/
 
-### Gradle ###
-.gradle
+.gradle/
+build/
+!build/allure-report.zip
+
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+allure-results/
+allure-report/
+build/allure-results/
+build/tmp/
+
+.DS_Store
+Thumbs.db
 
 
-
-### Logs ###
 *.log
+*.tmp
 
-### Config ###
-prod.properties
