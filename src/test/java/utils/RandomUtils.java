@@ -23,20 +23,29 @@ public class RandomUtils {
 
 
     // Рандом интервал дат между now и now.minusDays
-    public static String[] randomDateTimeInterval(int daysBack) {
+   public static String[] randomDateTimeInterval(int daysBack) {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime startLimit = now.minusDays(daysBack);
 
         long startEpoch = startLimit.toEpochSecond(ZoneOffset.UTC);
         long endEpoch = now.toEpochSecond(ZoneOffset.UTC);
 
-        long randomStart = ThreadLocalRandom.current().nextLong(startEpoch, endEpoch - 3600);
-        long randomEnd = ThreadLocalRandom.current().nextLong(randomStart + 1800, endEpoch);
+        String fromStr, toStr;
 
-        String from = LocalDateTime.ofEpochSecond(randomStart, 0, ZoneOffset.UTC).format(DATE_TIME);
-        String to = LocalDateTime.ofEpochSecond(randomEnd, 0, ZoneOffset.UTC).format(DATE_TIME);
+        do {
+            long randomStart = ThreadLocalRandom.current().nextLong(startEpoch, endEpoch - 3600);
+            long randomEnd = ThreadLocalRandom.current().nextLong(randomStart + 1800, endEpoch);
 
-        return new String[]{from, to};
+            LocalDateTime from = LocalDateTime.ofEpochSecond(randomStart, 0, ZoneOffset.UTC);
+            LocalDateTime to = LocalDateTime.ofEpochSecond(randomEnd, 0, ZoneOffset.UTC);
+
+            fromStr = from.format(DATE_TIME);
+            toStr = to.format(DATE_TIME);
+
+            // Проверка, чтобы были даты не в один день
+        } while (fromStr.substring(0, 10).equals(toStr.substring(0, 10)));
+
+        return new String[]{fromStr, toStr};
     }
 
 
